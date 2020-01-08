@@ -38,6 +38,11 @@ async def on_message(message):
         role = discord.utils.get(guild.roles, name="Authenticated")
         await member.add_roles(role)
     await client.process_commands(message)
-    
+
+@client.command(pass_context=True)
+async def clearcodes(ctx):
+    open("codes.txt", "w").close()
+    channel = ctx.message.channel
+    await channel.send("All codes have been cleared.")
 
 client.run("")
